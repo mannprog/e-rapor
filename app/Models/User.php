@@ -48,4 +48,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(DetailSiswa::class);
     }
+
+    public function rombel()
+    {
+        return $this->hasOne(Rombel::class);
+    }
+
+    public function matapel()
+    {
+        return $this->hasOne(Mapel::class);
+    }
+
+    public function siswarombel()
+    {
+        return $this->hasMany(RombelSiswa::class);
+    }
 }

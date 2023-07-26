@@ -1,10 +1,10 @@
-@extends('admin.layouts.app', ['title' => 'Kelola GTK'])
+@extends('admin.layouts.app', ['title' => 'Kelola Mata Pelajaran'])
 
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Kelola GTK</h4>
+                <h4 class="page-title">Kelola Mata Pelajaran</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    @include('admin.pages.users.gtk.component.addOrEdit')
+    @include('admin.pages.sistem.mapel.component.addOrEdit')
 @endsection
 
 @push('custom-styles')
@@ -61,12 +61,12 @@
 
             $('#createData').click(function() {
                 setTimeout(function() {
-                    $('#name').focus();
+                    $('#nama').focus();
                 }, 500);
                 $('#saveBtn').removeAttr('disabled');
                 $('#saveBtn').html("Simpan");
                 $('#itemForm').trigger("reset");
-                $('.modal-title').html("Tambah User");
+                $('.modal-title').html("Tambah Mata Pelajaran");
                 $('#modal-md').modal('show');
             });
 
@@ -77,14 +77,14 @@
                 var formData = new FormData($('#itemForm')[0]);
                 $.ajax({
                     data: formData,
-                    url: "{{ route('kelola.gtk.store') }}",
+                    url: "{{ route('sistem.mapel.store') }}",
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#itemForm').trigger("reset");
                         $('#modal-md').modal('hide');
-                        $('#kelolagtk-table').DataTable().draw();
+                        $('#kelolamapel-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -108,22 +108,19 @@
 
             $('body').on('click', '#editData', function() {
                 var item_id = $(this).data('id');
-                $.get("{{ route('kelola.gtk.index') }}" + '/' + item_id + '/edit', function(data) {
+                $.get("{{ route('sistem.mapel.index') }}" + '/' + item_id + '/edit', function(data) {
                     $('#modal-ed').modal('show');
                     setTimeout(function() {
-                        $('#name').focus();
+                        $('#nama').focus();
                     }, 500);
-                    $('.modal-title').html("Edit User");
+                    $('.modal-title').html("Edit Mata Pelajaran");
                     $('#editBtn').removeAttr('disabled');
                     $('#editBtn').html("Simpan");
                     $('#edit_item_id').val(data.id);
-                    $('#edit_name').val(data.name);
-                    $('#edit_username').val(data.username);
-                    $('#edit_email').val(data.email);
-                    $('#edit_nip').val(data.detail_gtk.nip);
-                    $('#edit_jabatan').val(data.detail_gtk.jabatan);
-                    $('#edit_jk').val(data.detail_gtk.jk);
-                    $('#edit_no_hp').val(data.detail_gtk.no_hp);
+                    $('#edit_kelas_id').val(data.kelas_id);
+                    $('#edit_rombel_id').val(data.rombel_id);
+                    $('#edit_guru_id').val(data.guru_id);
+                    $('#edit_nama').val(data.nama);
                 })
             });
 
@@ -135,14 +132,14 @@
                 $('#editBtn').html('Simpan ...');
                 $.ajax({
                     data: formData,
-                    url: "{{ route('kelola.gtk.index') }}" + '/' + item_id,
+                    url: "{{ route('sistem.mapel.index') }}" + '/' + item_id,
                     contentType: false,
                     processData: false,
                     type: "POST",
                     success: function(data) {
                         $('#editForm').trigger("reset");
                         $('#modal-ed').modal('hide');
-                        $('#kelolagtk-table').DataTable().draw();
+                        $('#kelolamapel-table').DataTable().draw();
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -168,19 +165,19 @@
                 e.preventDefault();
                 var confirmation = confirm("Apakah yakin untuk menghapus?");
                 if (confirmation) {
-                    var gtk_id = $(this).data('id');
+                    var item_id = $(this).data('id');
                     var formData = new FormData($('#deleteDoc')[0]);
                     $('.deleteBtn').attr('disabled', 'disabled');
                     $('.deleteBtn').html('...');
                     $.ajax({
                         data: formData,
-                        url: "{{ route('kelola.gtk.index') }}" + '/' + gtk_id,
+                        url: "{{ route('sistem.mapel.index') }}" + '/' + item_id,
                         contentType: false,
                         processData: false,
                         type: "POST",
                         success: function(data) {
                             $('#deleteDoc').trigger("reset");
-                            $('#kelolagtk-table').DataTable().draw();
+                            $('#kelolamapel-table').DataTable().draw();
                             toastr.success(data.message);
                         },
                         error: function(data) {

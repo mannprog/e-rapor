@@ -3,7 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelolaGtkController;
+use App\Http\Controllers\KelolaJurusanController;
+use App\Http\Controllers\KelolaKelasController;
+use App\Http\Controllers\KelolaMapelController;
+use App\Http\Controllers\KelolaNilaiController;
+use App\Http\Controllers\KelolaRombelController;
 use App\Http\Controllers\KelolaSiswaController;
+use App\Http\Controllers\KelolaTahunAjaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +32,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+
+        Route::resource('nilai', KelolaNilaiController::class);
+        Route::post('/nilai/{nilai}/input', [KelolaNilaiController::class, 'inputNilai'])->name('input.nilai');
+        Route::post('/nilai/{nilai}/delete', [KelolaNilaiController::class, 'delNilai'])->name('delete.nilai');
+
+        Route::prefix('/dashboard/kelola-sistem/')->group(function () {
+            Route::name('sistem.')->group(function () {
+                Route::resource('jurusan', KelolaJurusanController::class)->except(['create', 'show']);
+                Route::resource('kelas', KelolaKelasController::class)->except(['create', 'show']);
+                Route::resource('tahunajaran', KelolaTahunAjaranController::class)->except(['create', 'show']);
+                Route::resource('rombel', KelolaRombelController::class)->except(['create']);
+                Route::post('/rombel/{rombel}/addsiswa', [KelolaRombelController::class, 'addSiswa'])->name('rs.add');
+                Route::post('/rombel/{rombel}/delsiswa', [KelolaRombelController::class, 'delSiswa'])->name('rs.del');
+                Route::resource('mapel', KelolaMapelController::class)->except(['create', 'show']);
+            });
+        });
 
         Route::prefix('/dashboard/kelola-users/')->group(function () {
             Route::name('kelola.')->group(function () {

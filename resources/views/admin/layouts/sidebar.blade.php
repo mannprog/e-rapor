@@ -11,21 +11,10 @@
 
                 {{-- Menu Guru --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Guru:</h4>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-buttons.html" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span
-                            class="hide-menu">Target Pencapaian TP</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                        href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                            class="hide-menu">Input Nilai</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i
-                                    class="mdi mdi-note-outline"></i><span class="hide-menu"> Form Basic
-                                </span></a></li>
-                        <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
-                                    class="mdi mdi-note-plus"></i><span class="hide-menu"> Form Wizard
-                                </span></a></li>
-                    </ul>
-                </li>
+                <li class="sidebar-item {{ Route::is('nilai*') ? 'selected' : '' }}"> <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('nilai.index') }}"
+                        aria-expanded="false"><i class="mdi mdi-receipt"></i></i><span class="hide-menu">Input
+                            Nilai</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="pages-buttons.html" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span
                             class="hide-menu">Cek Penilaian</span></a></li>
@@ -113,21 +102,33 @@
 
                 {{-- Menu Admin --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Admin:</h4>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span
-                            class="hide-menu">Kelola Tahun Ajaran</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span
-                            class="hide-menu">Kelola Jurusan</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span
-                            class="hide-menu">Kelola Kelas</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span
-                            class="hide-menu">Kelola Rombel</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span
-                            class="hide-menu">Kelola Mata Pelajaran</span></a></li>
+                <li class="sidebar-item {{ Route::is('sistem*') ? 'selected' : '' }}"> <a
+                        class="sidebar-link has-arrow waves-effect waves-dark {{ Route::is('sistem*') ? 'active' : '' }}"
+                        href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span
+                            class="hide-menu">Kelola Sistem</span></a>
+                    <ul aria-expanded="false" class="collapse  first-level {{ Route::is('sistem*') ? 'in' : '' }}">
+                        <li class="sidebar-item {{ Route::is('sistem.jurusan*') ? 'active' : '' }}"><a
+                                href="{{ route('sistem.jurusan.index') }}" class="sidebar-link"><i
+                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Kelola Jurusan
+                                </span></a></li>
+                        <li class="sidebar-item {{ Route::is('sistem.kelas*') ? 'active' : '' }}"><a
+                                href="{{ route('sistem.kelas.index') }}" class="sidebar-link"><i
+                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Kelola Kelas
+                                </span></a></li>
+                        <li class="sidebar-item {{ Route::is('sistem.tahunajaran*') ? 'active' : '' }}"><a
+                                href="{{ route('sistem.tahunajaran.index') }}" class="sidebar-link"><i
+                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Kelola Tahun Ajaran
+                                </span></a></li>
+                        <li class="sidebar-item {{ Route::is('sistem.rombel*') ? 'active' : '' }}"><a
+                                href="{{ route('sistem.rombel.index') }}" class="sidebar-link"><i
+                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Kelola Rombel
+                                </span></a></li>
+                        <li class="sidebar-item {{ Route::is('sistem.mapel*') ? 'active' : '' }}"><a
+                                href="{{ route('sistem.mapel.index') }}" class="sidebar-link"><i
+                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Kelola Mata Pelajaran
+                                </span></a></li>
+                    </ul>
+                </li>
                 <li class="sidebar-item {{ Route::is('kelola*') ? 'selected' : '' }}"> <a
                         class="sidebar-link has-arrow waves-effect waves-dark {{ Route::is('kelola*') ? 'active' : '' }}"
                         href="javascript:void(0)" aria-expanded="false"><i
