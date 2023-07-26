@@ -25,7 +25,7 @@ class KelolaRombelRequest extends FormRequest
             'nama' => 'required|max:255',
             'kelas_id' => 'required',
             'ta_id' => 'required',
-            'walas_id' => 'required|unique:rombels,walas_id',
+            'walas_id' => 'required',
         ];
     }
 
@@ -37,7 +37,6 @@ class KelolaRombelRequest extends FormRequest
             'kelas_id.required' => 'Kelas harus diisi',
             'ta_id.required' => 'Tahun Ajaran harus diisi',
             'walas_id.required' => 'Walikelas harus diisi',
-            'walas_id.unique' => 'Walikelas telah digunakan',
         ];
     }
 }

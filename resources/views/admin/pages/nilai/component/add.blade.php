@@ -19,7 +19,7 @@
                                 id="rs_id" required>
                                 <option selected disabled>---Pilih Siswa---</option>
                                 @foreach ($rmblssw as $ssw)
-                                    <option value="{{ $ssw->id }}">{{ $ssw->siswa->name }} - {{ $ssw->id }}
+                                    <option value="{{ $ssw->id }}">{{ $ssw->siswa->name }}
                                     </option>
                                 @endforeach
                             </select>
