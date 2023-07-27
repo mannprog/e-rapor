@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Mapel;
 use App\Models\Rombel;
+use App\Models\Absensi;
 use App\Models\RombelSiswa;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
-use App\DataTables\KelolaNilaiDataTable;
-use App\Models\Nilai;
+use App\DataTables\AbsensiDataTable;
 
-class KelolaNilaiController extends Controller
+class AbsensiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(KelolaNilaiDataTable $dataTable)
+    public function index(AbsensiDataTable $dataTable)
     {
-        return $dataTable->render('admin.pages.nilai.index');
+        return $dataTable->render('admin.pages.absensi.index');
     }
 
     /**
@@ -29,29 +29,29 @@ class KelolaNilaiController extends Controller
         $mapel = Mapel::findOrFail($id);
         $rombel = Rombel::where('id', $mapel->rombel_id)->get();
         $rmblssw = RombelSiswa::where('rombel_id', $mapel->rombel_id)->get();
-        $nilai = Nilai::all();
+        $absen = Absensi::all();
 
-        return view('admin.pages.nilai.detail', compact(['mapel', 'rombel', 'rmblssw', 'nilai']));
+        return view('admin.pages.absensi.detail', compact(['mapel', 'rombel', 'rmblssw', 'absen']));
     }
 
-    public function inputNilai($id)
+    public function inputAbsen()
     {
         try {
-            DB::transaction(function () use ($id) {
+            DB::transaction(function () {
                 request()->validate([
                     'mapel_id' => 'required',
                     'rs_id' => 'required',
-                    'npengetahuan' => 'required',
-                    'nketerampilan' => 'required',
-                    'nsikap' => 'required',
+                    'alpa' => 'required',
+                    'izin' => 'required',
+                    'sakit' => 'required',
                 ]);
 
-                Nilai::create([
+                Absensi::create([
                     'mapel_id' => request('mapel_id'),
                     'rs_id' => request('rs_id'),
-                    'npengetahuan' => request('npengetahuan'),
-                    'nketerampilan' => request('nketerampilan'),
-                    'nsikap' => request('nsikap'),
+                    'alpa' => request('alpa'),
+                    'izin' => request('izin'),
+                    'sakit' => request('sakit'),
                 ]);
             });
         } catch (InvalidArgumentException $e) {
@@ -59,15 +59,15 @@ class KelolaNilaiController extends Controller
             return redirect()->back()->with('success', $message);
         }
 
-        return redirect()->back()->with('success', 'Nilai siswa berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Absensi siswa berhasil ditambahkan');
     }
 
-    public function delNilai($id)
+    public function delAbsensi($id)
     {
         try {
             DB::transaction(function () use ($id) {
 
-                $data = Nilai::findOrFail($id);
+                $data = Absensi::findOrFail($id);
                 $data->delete();
             });
         } catch (InvalidArgumentException $e) {
@@ -75,6 +75,6 @@ class KelolaNilaiController extends Controller
             return redirect()->back()->with('success', $message);
         }
 
-        return redirect()->back()->with('success', 'Nilai siswa berhasil dihapus');
+        return redirect()->back()->with('success', 'Absensi siswa berhasil dihapus');
     }
 }

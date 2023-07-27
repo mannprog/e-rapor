@@ -25,4 +25,9 @@ class RombelSiswa extends Model
     {
         return $this->hasMany(Nilai::class);
     }
+
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class);
+    }
 }

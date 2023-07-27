@@ -6,7 +6,7 @@
             <div class="col-12 d-flex no-block align-items-center">
                 <h4 class="page-title">Daftar Siswa</h4>
                 <div class="ms-auto text-end">
-                    <a href="{{ route('nilai.index') }}" class="btn btn-sm btn-secondary shadow">Kembali</a>
+                    <a href="{{ route('absensi.index') }}" class="btn btn-sm btn-secondary shadow">Kembali</a>
                 </div>
             </div>
         </div>
@@ -25,9 +25,9 @@
                             <tr>
                                 <th><b>#</b></th>
                                 <th><b>Nama Siswa</b></th>
-                                <th><b>Nilai Pengetahuan</b></th>
-                                <th><b>Nilai Keterampilan</b></th>
-                                <th><b>Nilai Sikap</b></th>
+                                <th><b>Tidak Ada Keterangan</b></th>
+                                <th><b>Izin</b></th>
+                                <th><b>Sakit</b></th>
                                 <th><b>Aksi</b></th>
                             </tr>
                         </thead>
@@ -41,13 +41,13 @@
                                     <tr class="align-items-center">
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $rs->siswa->name }}</td>
-                                        @foreach ($nilai as $n)
-                                            @if ($n->rs_id === $rs->id)
-                                                <td class="text-center">{{ $n->npengetahuan }}</td>
-                                                <td class="text-center">{{ $n->nketerampilan }}</td>
-                                                <td class="text-center">{{ $n->nsikap }}</td>
+                                        @foreach ($absen as $ab)
+                                            @if ($ab->rs_id === $rs->id)
+                                                <td class="text-center">{{ $ab->alpa }}</td>
+                                                <td class="text-center">{{ $ab->izin }}</td>
+                                                <td class="text-center">{{ $ab->sakit }}</td>
                                                 <td class="text-center">
-                                                    <form action="{{ route('delete.nilai', $n->id) }}" method="post"
+                                                    <form action="{{ route('delete.absensi', $ab->id) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    @include('admin.pages.nilai.component.add')
+    @include('admin.pages.absensi.component.add')
 @endsection
 
 @push('custom-scripts')

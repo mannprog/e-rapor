@@ -18,9 +18,10 @@
 
                 
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Walikelas:</h4>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-clipboard-account"></i><span
-                            class="hide-menu">Kelola Absen</span></a></li>
+                <li class="sidebar-item <?php echo e(Route::is('absensi*') ? 'selected' : ''); ?>"> <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo e(route('absensi.index')); ?>"
+                        aria-expanded="false"><i class="mdi mdi-clipboard-account"></i><span class="hide-menu">Kelola
+                            Absensi</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-file-document"></i><span
                             class="hide-menu">Kelola Rapor</span></a></li>

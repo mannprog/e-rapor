@@ -21,14 +21,14 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead class="thead-light">
+                        <thead class="thead-light text-center">
                             <tr>
-                                <th>#</th>
-                                <th>Nama Siswa</th>
-                                <th>Nilai Pengetahuan</th>
-                                <th>Nilai Keterampilan</th>
-                                <th>Nilai Sikap</th>
-                                <th>Aksi</th>
+                                <th><b>#</b></th>
+                                <th><b>Nama Siswa</b></th>
+                                <th><b>Nilai Pengetahuan</b></th>
+                                <th><b>Nilai Keterampilan</b></th>
+                                <th><b>Nilai Sikap</b></th>
+                                <th><b>Aksi</b></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,14 +39,14 @@
                             <?php else: ?>
                                 <?php $__currentLoopData = $rmblssw; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="align-items-center">
-                                        <td><?php echo e($loop->iteration); ?></td>
+                                        <td class="text-center"><?php echo e($loop->iteration); ?></td>
                                         <td><?php echo e($rs->siswa->name); ?></td>
                                         <?php $__currentLoopData = $nilai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $n): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($n->rs_id === $rs->id): ?>
-                                                <td><?php echo e($n->npengetahuan); ?></td>
-                                                <td><?php echo e($n->nketerampilan); ?></td>
-                                                <td><?php echo e($n->nsikap); ?></td>
-                                                <td>
+                                                <td class="text-center"><?php echo e($n->npengetahuan); ?></td>
+                                                <td class="text-center"><?php echo e($n->nketerampilan); ?></td>
+                                                <td class="text-center"><?php echo e($n->nsikap); ?></td>
+                                                <td class="text-center">
                                                     <form action="<?php echo e(route('delete.nilai', $n->id)); ?>" method="post"
                                                         enctype="multipart/form-data">
                                                         <?php echo csrf_field(); ?>

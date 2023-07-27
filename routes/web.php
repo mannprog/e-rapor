@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelolaGtkController;
@@ -33,9 +34,13 @@ Route::middleware('auth')->group(function () {
             return view('admin.dashboard');
         })->name('dashboard');
 
-        Route::resource('nilai', KelolaNilaiController::class);
+        Route::resource('nilai', KelolaNilaiController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::post('/nilai/{nilai}/input', [KelolaNilaiController::class, 'inputNilai'])->name('input.nilai');
         Route::post('/nilai/{nilai}/delete', [KelolaNilaiController::class, 'delNilai'])->name('delete.nilai');
+
+        Route::resource('absensi', AbsensiController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::post('/absensi/{absensi}/input', [AbsensiController::class, 'inputAbsen'])->name('input.absensi');
+        Route::post('/absensi/{absensi}/delete', [AbsensiController::class, 'delAbsen'])->name('delete.absensi');
 
         Route::prefix('/dashboard/kelola-sistem/')->group(function () {
             Route::name('sistem.')->group(function () {
