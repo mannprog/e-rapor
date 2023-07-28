@@ -41,20 +41,23 @@ class KelolaKenaikanController extends Controller
         $siswaId = request('siswa_id');
         try {
             DB::transaction(function () use ($siswaId) {
-                $data = request()->validate([
+                // $data = request()->validate([
+                //     'rombel_id' => 'required',
+                // ]);
+
+                // $datas = [
+                //     'rombel_id' => $data['rombel_id'],
+                // ];
+                
+                // RombelSiswa::updateOrCreate(['siswa_id' => $siswaId], $datas);
+                request()->validate([
                     'rombel_id' => 'required',
                 ]);
 
-                $datas = [
-                    'rombel_id' => $data['rombel_id'],
-                ];
-                
-                RombelSiswa::updateOrCreate(['siswa_id' => $siswaId], $datas);
-
-                // RombelSiswa::create([
-                //     'rombel_id' => request('rombel_id'),
-                //     'siswa_id' => request('siswa_id'),
-                // ]);
+                RombelSiswa::create([
+                    'rombel_id' => request('rombel_id'),
+                    'siswa_id' => $siswaId,
+                ]);
             });
         } catch (InvalidArgumentException $e) {
             $message = $e->getMessage();

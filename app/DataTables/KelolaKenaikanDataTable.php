@@ -29,20 +29,20 @@ class KelolaKenaikanDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->addIndexColumn()
         ->addColumn('rombel', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
 
-            return $rmbl->rombel->nama;
+            return $rmbl->nama;
         })
         ->rawColumns(['rombel'])
         ->addColumn('kelas', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
 
-            return $rmbl->rombel->kelas->nama;
+            return $rmbl->kelas->nama;
         })
         ->rawColumns(['kelas'])
          ->addColumn('semester', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
-            $data = TahunAjaran::findOrFail($rmbl->rombel->ta_id);
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
+            $data = TahunAjaran::findOrFail($rmbl->ta_id);
  
              $gnj = 'Semester Ganjil';
              $gnp = 'Semester Genap';
@@ -54,8 +54,9 @@ class KelolaKenaikanDataTable extends DataTable
          })
          ->rawColumns(['semester'])
          ->addColumn('tajaran', function ($row) {
-             $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
-             $data = TahunAjaran::findOrFail($rmbl->rombel->ta_id);
+            //  $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
+             $data = TahunAjaran::findOrFail($rmbl->ta_id);
   
              return $data->ta;
           })

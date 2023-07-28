@@ -28,7 +28,7 @@
                                             @if ($rmbl->ta_id === $tjr->id)
                                                 {{ $tjr->ta }} ({{ $tjr->semester }})
                                             @endif
-                                        @endforeach - {{ $rmbl->id }}
+                                        @endforeach
                                     </option>
                                 @endforeach
                             </select>

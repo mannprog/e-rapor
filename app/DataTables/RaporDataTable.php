@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\RaporSiswa;
+use App\Models\Rombel;
 use App\Models\RombelSiswa;
 use App\Models\TahunAjaran;
 use App\Models\User;
@@ -27,21 +28,27 @@ class RaporDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addIndexColumn()
-        ->addColumn('rombel', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
+        ->addColumn('siswa', function ($row) {
+            $data = User::where('id', $row->siswa_id)->first();
 
-            return $rmbl->rombel->nama;
+            return $data->name;
+        })
+        ->rawColumns(['siswa'])
+        ->addColumn('rombel', function ($row) {
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
+
+            return $rmbl->nama;
         })
         ->rawColumns(['rombel'])
         ->addColumn('kelas', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
 
-            return $rmbl->rombel->kelas->nama;
+            return $rmbl->kelas->nama;
         })
         ->rawColumns(['kelas'])
          ->addColumn('semester', function ($row) {
-            $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
-            $data = TahunAjaran::findOrFail($rmbl->rombel->ta_id);
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
+            $data = TahunAjaran::findOrFail($rmbl->ta_id);
  
              $gnj = 'Semester Ganjil';
              $gnp = 'Semester Genap';
@@ -53,8 +60,8 @@ class RaporDataTable extends DataTable
          })
          ->rawColumns(['semester'])
          ->addColumn('tajaran', function ($row) {
-             $rmbl = RombelSiswa::where('siswa_id', $row->siswa_id)->first();
-             $data = TahunAjaran::findOrFail($rmbl->rombel->ta_id);
+            $rmbl = Rombel::where('walas_id', $row->walas_id)->first();
+             $data = TahunAjaran::findOrFail($rmbl->ta_id);
   
              return $data->ta;
           })
@@ -72,8 +79,7 @@ class RaporDataTable extends DataTable
     {
         $walasId = Auth::id();
         return $model->newQuery()
-        ->where('walas_id', $walasId)
-        ->with(['walas', 'siswa']);
+        ->where('walas_id', $walasId);
     }
 
     /**
@@ -114,7 +120,7 @@ class RaporDataTable extends DataTable
                     ->orderable(false)
                     ->addClass("text-sm font-weight-normal")
                     ->addClass('text-center'),
-                Column::make('siswa.name')
+                Column::make('siswa')
                     ->addClass("text-sm font-weight-normal text-wrap")
                     ->title('Nama Siswa'),
                 Column::make('rombel')

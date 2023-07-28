@@ -4,8 +4,11 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Daftar Mata Pelajaran - {{ $siswa->name }}</h4>
+                <h4 class="page-title">Daftar Mata Pelajaran - {{ $data->siswa->name }}</h4>
                 <div class="ms-auto text-end">
+                    <a href="{{ route('rapor.export', $data->id) }}" target="_blank" class="btn btn-sm btn-primary shadow"><i
+                            class="fas fa-download me-2"></i>
+                        Export</a>
                     <a href="{{ route('rapor.index') }}" class="btn btn-sm btn-secondary shadow">Kembali</a>
                 </div>
             </div>

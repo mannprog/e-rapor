@@ -12,6 +12,7 @@ use App\Http\Controllers\KelolaNilaiController;
 use App\Http\Controllers\KelolaRombelController;
 use App\Http\Controllers\KelolaSiswaController;
 use App\Http\Controllers\KelolaTahunAjaranController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RaporController;
 
 /*
@@ -46,8 +47,12 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('rapor', RaporController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::post('/rapor/{rapor}/editabsensi', [RaporController::class, 'editAbsensi'])->name('edit.absensi');
+        Route::get('/rapor/{rapor}/export', [RaporController::class, 'export'])->name('rapor.export');
 
         Route::resource('kenaikan', KelolaKenaikanController::class)->except(['create', 'edit', 'destroy']);
+
+        Route::resource('laporan', LaporanController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::get('/laporan/{rombel}/export', [LaporanController::class, 'export'])->name('laporan.export');
 
         Route::prefix('/dashboard/kelola-sistem/')->group(function () {
             Route::name('sistem.')->group(function () {

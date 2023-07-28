@@ -88,14 +88,12 @@ class KelolaMapelController extends Controller
             DB::transaction(function () use ($item_id) {
                 request()->validate([
                     'nama' => 'required|max:255',
-                    'kelas_id' => 'required',
                     'rombel_id' => 'required',
                     'guru_id' => 'required',
                 ]);
 
                 $user = Mapel::findOrFail($item_id);
                 $user->nama = request('nama');
-                $user->kelas_id = request('kelas_id');
                 $user->rombel_id = request('rombel_id');
                 $user->guru_id = request('guru_id');
                 $user->save();

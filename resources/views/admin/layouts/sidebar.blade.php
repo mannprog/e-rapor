@@ -28,27 +28,10 @@
                             Kenaikan</span></a></li>
                 {{-- Menu Kepala Sekolah --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Kepala Sekolah:</h4>
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
-                        href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-file"></i><span
-                            class="hide-menu">Laporan </span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="index2.html" class="sidebar-link"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Dashboard-2
-                                </span></a></li>
-                        <li class="sidebar-item"><a href="pages-gallery.html" class="sidebar-link"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Gallery
-                                </span></a></li>
-                        <li class="sidebar-item"><a href="pages-calendar.html" class="sidebar-link"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Calendar
-                                </span></a></li>
-                        <li class="sidebar-item"><a href="pages-invoice.html" class="sidebar-link"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Invoice
-                                </span></a></li>
-                        <li class="sidebar-item"><a href="pages-chat.html" class="sidebar-link"><i
-                                    class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Chat Option
-                                </span></a></li>
-                    </ul>
-                </li>
+                <li class="sidebar-item {{ Route::is('laporan*') ? 'selected' : '' }}"> <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('laporan.index') }}"
+                        aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Laporan
+                            Rapor</span></a></li>
 
                 {{-- Menu Admin --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Admin:</h4>
