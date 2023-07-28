@@ -14,6 +14,7 @@ use App\Http\Controllers\KelolaSiswaController;
 use App\Http\Controllers\KelolaTahunAjaranController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RaporController;
+use App\Http\Controllers\SiswaNilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/siswa', function () {
         return view('siswa.dashboard');
     })->name('siswa.dashboard');
+
+    Route::resource('nilaisiswa', SiswaNilaiController::class)->except(['create', 'edit', 'destroy']);
+    Route::get('/nilaisiswa/{nilaisiswa}/export', [SiswaNilaiController::class, 'export'])->name('nilaisiswa.export');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
