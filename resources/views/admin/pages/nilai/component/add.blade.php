@@ -4,13 +4,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('input.nilai', $mapel->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="mapel_id" id="mapel_id" value="{{ $mapel->id }}">
+                <input type="hidden" name="walas_id" id="walas_id" value="{{ $mapel->rombel->walas_id }}">
                 {{-- <input type="text" name="rs_id" id="rs_id" value="{{ $rmblssw->id }}"> --}}
                 <div class="modal-body">
                     <div class="row align-items-center mb-3">

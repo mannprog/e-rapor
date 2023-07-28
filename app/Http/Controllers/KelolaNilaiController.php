@@ -10,6 +10,8 @@ use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\KelolaNilaiDataTable;
 use App\Models\Nilai;
+use App\Models\Rapor;
+use App\Models\RaporSiswa;
 
 class KelolaNilaiController extends Controller
 {
@@ -29,8 +31,9 @@ class KelolaNilaiController extends Controller
         $mapel = Mapel::findOrFail($id);
         $rombel = Rombel::where('id', $mapel->rombel_id)->get();
         $rmblssw = RombelSiswa::where('rombel_id', $mapel->rombel_id)->get();
-        $nilai = Nilai::all();
+        $nilai = Nilai::where('mapel_id', $id)->get();
 
+        // return dd($nilai);
         return view('admin.pages.nilai.detail', compact(['mapel', 'rombel', 'rmblssw', 'nilai']));
     }
 
@@ -39,6 +42,7 @@ class KelolaNilaiController extends Controller
         try {
             DB::transaction(function () use ($id) {
                 request()->validate([
+                    'walas_id' => 'required',
                     'mapel_id' => 'required',
                     'rs_id' => 'required',
                     'npengetahuan' => 'required',
@@ -46,12 +50,27 @@ class KelolaNilaiController extends Controller
                     'nsikap' => 'required',
                 ]);
 
-                Nilai::create([
+                $nilai = Nilai::create([
                     'mapel_id' => request('mapel_id'),
                     'rs_id' => request('rs_id'),
                     'npengetahuan' => request('npengetahuan'),
                     'nketerampilan' => request('nketerampilan'),
                     'nsikap' => request('nsikap'),
+                ]);
+
+                $siswa = RombelSiswa::findOrFail(request('rs_id'));
+
+                $rs = RaporSiswa::where('siswa_id', $siswa->siswa_id)->first();
+                if (!$rs) {
+                    $rs = new RaporSiswa();
+                    $rs->walas_id = request('walas_id');
+                    $rs->siswa_id = $siswa->siswa_id;
+                    $rs->save();
+                }
+
+                Rapor::create([
+                    'rapor_id' => $rs->id,
+                    'nilai_id' => $nilai->id,
                 ]);
             });
         } catch (InvalidArgumentException $e) {

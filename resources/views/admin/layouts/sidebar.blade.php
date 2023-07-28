@@ -18,16 +18,14 @@
 
                 {{-- Menu Walikelas --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Walikelas:</h4>
-                <li class="sidebar-item {{ Route::is('absensi*') ? 'selected' : '' }}"> <a
-                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('absensi.index') }}"
-                        aria-expanded="false"><i class="mdi mdi-clipboard-account"></i><span class="hide-menu">Kelola
-                            Absensi</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-file-document"></i><span
-                            class="hide-menu">Kelola Rapor</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-account-switch"></i><span
-                            class="hide-menu">Kelola Kenaikan</span></a></li>
+                <li class="sidebar-item {{ Route::is('rapor*') ? 'selected' : '' }}"> <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('rapor.index') }}"
+                        aria-expanded="false"><i class="mdi mdi-file-document"></i><span class="hide-menu">Kelola
+                            Rapor</span></a></li>
+                <li class="sidebar-item {{ Route::is('kenaikan*') ? 'selected' : '' }}"> <a
+                        class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('kenaikan.index') }}"
+                        aria-expanded="false"><i class="mdi mdi-account-switch"></i><span class="hide-menu">Kelola
+                            Kenaikan</span></a></li>
                 {{-- Menu Kepala Sekolah --}}
                 <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Kepala Sekolah:</h4>
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"

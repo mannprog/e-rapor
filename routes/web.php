@@ -6,11 +6,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelolaGtkController;
 use App\Http\Controllers\KelolaJurusanController;
 use App\Http\Controllers\KelolaKelasController;
+use App\Http\Controllers\KelolaKenaikanController;
 use App\Http\Controllers\KelolaMapelController;
 use App\Http\Controllers\KelolaNilaiController;
 use App\Http\Controllers\KelolaRombelController;
 use App\Http\Controllers\KelolaSiswaController;
 use App\Http\Controllers\KelolaTahunAjaranController;
+use App\Http\Controllers\RaporController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('absensi', AbsensiController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::post('/absensi/{absensi}/input', [AbsensiController::class, 'inputAbsen'])->name('input.absensi');
         Route::post('/absensi/{absensi}/delete', [AbsensiController::class, 'delAbsen'])->name('delete.absensi');
+
+        Route::resource('rapor', RaporController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::post('/rapor/{rapor}/editabsensi', [RaporController::class, 'editAbsensi'])->name('edit.absensi');
+
+        Route::resource('kenaikan', KelolaKenaikanController::class)->except(['create', 'edit', 'destroy']);
 
         Route::prefix('/dashboard/kelola-sistem/')->group(function () {
             Route::name('sistem.')->group(function () {

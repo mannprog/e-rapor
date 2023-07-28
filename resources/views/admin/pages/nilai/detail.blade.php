@@ -32,33 +32,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($rmblssw == null)
-                                <tr>
-                                    <td>Belum Ada Siswa...</td>
+                            @foreach ($rmblssw as $rs)
+                                <tr class="align-items-center">
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $rs->siswa->name }}</td>
+                                    @foreach ($nilai as $n)
+                                        @if ($n->rs_id === $rs->id)
+                                            <td class="text-center">{{ $n->npengetahuan }}</td>
+                                            <td class="text-center">{{ $n->nketerampilan }}</td>
+                                            <td class="text-center">{{ $n->nsikap }}</td>
+                                            <td class="text-center">
+                                                <form action="{{ route('delete.nilai', $n->id) }}" method="post"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
+                                                            class="fas fa-trash-alt fa-sm text-white"></i></button>
+                                                </form>
+                                            </td>
+                                        @endif
+                                    @endforeach
                                 </tr>
-                            @else
-                                @foreach ($rmblssw as $rs)
-                                    <tr class="align-items-center">
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $rs->siswa->name }}</td>
-                                        @foreach ($nilai as $n)
-                                            @if ($n->rs_id === $rs->id)
-                                                <td class="text-center">{{ $n->npengetahuan }}</td>
-                                                <td class="text-center">{{ $n->nketerampilan }}</td>
-                                                <td class="text-center">{{ $n->nsikap }}</td>
-                                                <td class="text-center">
-                                                    <form action="{{ route('delete.nilai', $n->id) }}" method="post"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
-                                                                class="fas fa-trash-alt fa-sm text-white"></i></button>
-                                                    </form>
-                                                </td>
-                                            @endif
-                                        @endforeach
-                                    </tr>
-                                @endforeach
-                            @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
