@@ -66,8 +66,9 @@
                             class="rounded-circle" width="31">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user me-1 ms-1"></i>
-                            My Profile</a>
+                        <a class="dropdown-item" href="{{ route('profil.admin', auth()->user()->id) }}"><i
+                                class="ti-user me-1 ms-1"></i>
+                            Profil Saya</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i
                                 class="fa fa-power-off me-1 ms-1"></i>
                             Logout</a>

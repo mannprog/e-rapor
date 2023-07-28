@@ -36,6 +36,8 @@ Route::post('/', [AuthController::class, 'prosesLogin'])->name('prosesLogin');
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('dashboard');
+        Route::get('/profil/admin/{id}', [DashboardController::class, 'profilAdmin'])->name('profil.admin');
+        Route::post('/profil/admin/{id}', [DashboardController::class, 'updateAdmin'])->name('update.profil.admin');
 
         Route::resource('nilai', KelolaNilaiController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::post('/nilai/{nilai}/input', [KelolaNilaiController::class, 'inputNilai'])->name('input.nilai');
@@ -75,6 +77,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/siswa', [DashboardController::class, 'indexSiswa'])->name('siswa.dashboard');
+    Route::get('/profil/{id}', [DashboardController::class, 'profilSiswa'])->name('profil.siswa');
+    Route::post('/profil/{id}', [DashboardController::class, 'updateSiswa'])->name('update.profil.siswa');
 
     Route::resource('nilaisiswa', SiswaNilaiController::class)->except(['create', 'edit', 'destroy']);
     Route::get('/nilaisiswa/{nilaisiswa}/export', [SiswaNilaiController::class, 'export'])->name('nilaisiswa.export');

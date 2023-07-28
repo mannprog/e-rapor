@@ -62,12 +62,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#"
                         id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('assets/images/users/default.jpg') }}" alt="user" class="rounded-circle"
-                            width="31">
+                        <img src="{{ asset('assets/images/users/' . auth()->user()->foto) }}" alt="user"
+                            class="rounded-circle" width="31">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user me-1 ms-1"></i>
-                            My Profile</a>
+                        <a class="dropdown-item" href="{{ route('profil.siswa', auth()->user()->id) }}"><i
+                                class="ti-user me-1 ms-1"></i>
+                            Profil Saya</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i
                                 class="fa fa-power-off me-1 ms-1"></i>
                             Logout</a>
