@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KelolaGtkController;
 use App\Http\Controllers\KelolaJurusanController;
 use App\Http\Controllers\KelolaKelasController;
@@ -34,9 +35,7 @@ Route::post('/', [AuthController::class, 'prosesLogin'])->name('prosesLogin');
 
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('dashboard');
 
         Route::resource('nilai', KelolaNilaiController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::post('/nilai/{nilai}/input', [KelolaNilaiController::class, 'inputNilai'])->name('input.nilai');
@@ -75,9 +74,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::get('/siswa', function () {
-        return view('siswa.dashboard');
-    })->name('siswa.dashboard');
+    Route::get('/siswa', [DashboardController::class, 'indexSiswa'])->name('siswa.dashboard');
 
     Route::resource('nilaisiswa', SiswaNilaiController::class)->except(['create', 'edit', 'destroy']);
     Route::get('/nilaisiswa/{nilaisiswa}/export', [SiswaNilaiController::class, 'export'])->name('nilaisiswa.export');
