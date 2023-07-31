@@ -52,7 +52,7 @@
                 <input type="hidden" name="item_id" id="edit_item_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Jurusan<span class="text-danger">*</span></label>
+                        <label for="nama" class="form-label">Nama Kelas<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-sm" id="edit_nama" name="nama"
                             required autofocus>
                     </div>

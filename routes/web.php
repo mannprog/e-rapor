@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('laporan', LaporanController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
         Route::get('/laporan/{rombel}/export', [LaporanController::class, 'export'])->name('laporan.export');
 
+        Route::resource('cetak', LaporanController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+        Route::get('/cetak/{rombel}/export', [LaporanController::class, 'export'])->name('cetak.export');
+
         Route::prefix('/dashboard/kelola-sistem/')->group(function () {
             Route::name('sistem.')->group(function () {
                 Route::resource('jurusan', KelolaJurusanController::class)->except(['create', 'show']);
@@ -81,7 +84,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/profil/{id}', [DashboardController::class, 'updateSiswa'])->name('update.profil.siswa');
 
     Route::resource('nilaisiswa', SiswaNilaiController::class)->except(['create', 'edit', 'destroy']);
-    Route::get('/nilaisiswa/{nilaisiswa}/export', [SiswaNilaiController::class, 'export'])->name('nilaisiswa.export');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

@@ -49,6 +49,10 @@
                 @can('admin')
                     {{-- Menu Admin --}}
                     <h4 class="mt-3 pt-3 mx-3 text-secondary border-top border-secondary">Menu Admin:</h4>
+                    <li class="sidebar-item {{ Route::is('cetak*') ? 'selected' : '' }}"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('cetak.index') }}"
+                            aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Cetak
+                                Rapor</span></a></li>
                     <li class="sidebar-item {{ Route::is('sistem*') ? 'selected' : '' }}"> <a
                             class="sidebar-link has-arrow waves-effect waves-dark {{ Route::is('sistem*') ? 'active' : '' }}"
                             href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-settings"></i><span

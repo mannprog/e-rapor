@@ -7,9 +7,6 @@
                 <h4 class="page-title">Riwayat Pembelajaran - {{ $data->siswa->name }} ({{ $data->walas->name }})
                 </h4>
                 <div class="ms-auto text-end">
-                    <a href="{{ route('nilaisiswa.export', $data->id) }}" target="_blank"
-                        class="btn btn-sm btn-primary shadow"><i class="fas fa-download me-2"></i>
-                        Export</a>
                     <a href="{{ route('nilaisiswa.index') }}" class="btn btn-sm btn-secondary shadow">Kembali</a>
                 </div>
             </div>
