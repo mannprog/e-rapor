@@ -25,28 +25,41 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerPolicies();
+        
         Gate::define('admin', function(User $user) {
-            $detailGtk = DetailGtk::where('jabatan', 'admin')->first();
-
-            return $user->id === $detailGtk->user_id;
+            if ($user->detailGtk && $user->detailGtk->jabatan === 'admin') {
+                return true;
+            }
+        
+            return false;
         });
 
         Gate::define('kepalasekolah', function(User $user) {
-            $detailGtk = DetailGtk::where('jabatan', 'kepalasekolah')->first();
-
-            return $user->id === $detailGtk->user_id;
+            if ($user->detailGtk && $user->detailGtk->jabatan === 'kepalasekolah') {
+                return true;
+            }
+        
+            return false;
         });
 
         Gate::define('walikelas', function(User $user) {
-            $detailGtk = DetailGtk::where('jabatan', 'walikelas')->first();
-
-            return $user->id === $detailGtk->user_id;
+            if ($user->detailGtk && $user->detailGtk->jabatan === 'walikelas') {
+                return true;
+            }
+        
+            return false;
         });
 
         Gate::define('guru', function(User $user) {
-            $detailGtk = DetailGtk::where('jabatan', 'guru')->first();
+            // $detailGtk = DetailGtk::where('jabatan', 'guru')->first();
 
-            return $user->id === $detailGtk->user_id;
+            // return $user->id === $detailGtk->user_id;
+            if ($user->detailGtk && $user->detailGtk->jabatan === 'guru') {
+                return true;
+            }
+        
+            return false;
         });
     }
 }

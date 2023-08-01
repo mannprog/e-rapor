@@ -15,8 +15,8 @@ class DashboardController extends Controller
 {
     public function indexAdmin()
     {
-        $siswa = User::where('is_admin', 0)->count();
-        $gtk = User::where('is_admin', 1)->count();
+        $siswa = User::where('is_admin', 1)->count();
+        $gtk = User::where('is_admin', 0)->count();
         $rombel = Rombel::all()->count();
         $jurusan = Jurusan::all()->count();
 
@@ -25,8 +25,8 @@ class DashboardController extends Controller
 
     public function indexSiswa()
     {
-        $siswa = User::where('is_admin', 0)->count();
-        $gtk = User::where('is_admin', 1)->count();
+        $siswa = User::where('is_admin', 1)->count();
+        $gtk = User::where('is_admin', 0)->count();
         $rombel = Rombel::all()->count();
         $jurusan = Jurusan::all()->count();
 
