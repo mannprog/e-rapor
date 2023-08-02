@@ -83,6 +83,9 @@ class KelolaKelasDataTable extends DataTable
             Column::make('jurusan.nama')
                 ->addClass("text-sm font-weight-normal text-wrap")
                 ->title('Nama Jurusan'),
+            Column::make('kkm')
+                ->addClass("text-sm font-weight-normal text-wrap")
+                ->title('KKM'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

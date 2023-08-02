@@ -19,16 +19,24 @@
                     Tambah Nilai</button>
             </div>
             <div class="card-body">
+                {{-- <div class="mb-3">
+                    <label for="search">Cari:</label>
+                    <input type="text" id="search" class="form-control form-control-sm" placeholder="Pencarian...">
+                </div> --}}
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="nilai-table" class="table table-bordered">
                         <thead class="thead-light text-center">
                             <tr>
-                                <th><b>#</b></th>
-                                <th><b>Nama Siswa</b></th>
-                                <th><b>Nilai Pengetahuan</b></th>
-                                <th><b>Nilai Keterampilan</b></th>
-                                <th><b>Nilai Sikap</b></th>
-                                <th><b>Aksi</b></th>
+                                <th>#</th>
+                                <th>Nama Siswa</th>
+                                <th>Nilai Harian</th>
+                                <th>Nilai UTS</th>
+                                <th>Nilai UAS</th>
+                                <th>Capaian Kompetensi</th>
+                                <th>Sakit</th>
+                                <th>Izin</th>
+                                <th>Tanpa Keterangan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,9 +46,13 @@
                                     <td>{{ $rs->siswa->name }}</td>
                                     @foreach ($nilai as $n)
                                         @if ($n->rs_id === $rs->id)
-                                            <td class="text-center">{{ $n->npengetahuan }}</td>
-                                            <td class="text-center">{{ $n->nketerampilan }}</td>
-                                            <td class="text-center">{{ $n->nsikap }}</td>
+                                            <td class="text-center">{{ $n->nharian }}</td>
+                                            <td class="text-center">{{ $n->nuts }}</td>
+                                            <td class="text-center">{{ $n->nuas }}</td>
+                                            <td>{{ $n->ck }}</td>
+                                            <td class="text-center">{{ $n->sakit }}</td>
+                                            <td class="text-center">{{ $n->izin }}</td>
+                                            <td class="text-center">{{ $n->alpa }}</td>
                                             <td class="text-center">
                                                 <form action="{{ route('delete.nilai', $n->id) }}" method="post"
                                                     enctype="multipart/form-data">
@@ -85,6 +97,29 @@
                 $('.modal-title').html("Input Nilai");
                 $('#modal-md').modal('show');
             });
+
+            // var table = $('#nilai-table').DataTable({
+            //     "processing": true,
+            //     "serverSide": true,
+            //     "ajax": "{{ route('nilai.data', ['id' => $mapel->id]) }}",
+            //     "columns": [{
+            //             "data": "rombelsiswa.siswa.name"
+            //         },
+            //         {
+            //             "data": "nharian"
+            //         },
+            //         {
+            //             "data": "nuts"
+            //         },
+            //         {
+            //             "data": "nuas"
+            //         },
+            //     ]
+            // });
+
+            // $('#search').on('keyup', function() {
+            //     table.search(this.value).draw();
+            // });
         });
     </script>
 @endpush

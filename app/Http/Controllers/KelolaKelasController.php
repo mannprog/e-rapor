@@ -36,6 +36,7 @@ class KelolaKelasController extends Controller
                 $datas = [
                     'nama' => $data['nama'],
                     'jurusan_id' => $data['jurusan_id'],
+                    'kkm' => $data['kkm'],
                 ];
                 
                 Kelas::updateOrCreate(['id' => $dataId], $datas);
@@ -83,6 +84,7 @@ class KelolaKelasController extends Controller
                 $datas = [
                     'nama' => $data['nama'],
                     'jurusan_id' => $data['jurusan_id'],
+                    'kkm' => $data['kkm'],
                 ];
 
                 Kelas::updateOrCreate(['id' => $item_id], $datas);

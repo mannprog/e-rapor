@@ -119,6 +119,7 @@
                     $('#edit_item_id').val(data.id);
                     $('#edit_nama').val(data.nama);
                     $('#edit_jurusan_id').val(data.jurusan_id);
+                    $('#edit_kkm').val(data.kkm);
                 })
             });
 

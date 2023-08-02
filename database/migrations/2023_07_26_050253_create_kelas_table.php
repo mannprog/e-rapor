@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('jurusan_id');
             $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('restrict');
             $table->string('nama');
+            $table->string('kkm');
             $table->timestamps();
         });
     }

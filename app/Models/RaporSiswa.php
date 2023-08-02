@@ -25,4 +25,19 @@ class RaporSiswa extends Model
     {
         return $this->hasMany(Rapor::class);
     }
+
+    public function sikap()
+    {
+        return $this->hasOne(Sikap::class);
+    }
+
+    public function pkl()
+    {
+        return $this->hasOne(Pkl::class);
+    }
+
+    public function ekskul()
+    {
+        return $this->hasMany(Ekskul::class);
+    }
 }

@@ -25,6 +25,12 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="kkm" class="form-label">Kriteria Ketuntasan Minimal (KKM)<span
+                                class="text-danger">*</span></label>
+                        <input type="number" class="form-control form-control-sm" id="kkm" name="kkm"
+                            required autofocus>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -65,6 +71,12 @@
                                 <option value="{{ $jrs->id }}">{{ $jrs->nama }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kkm" class="form-label">Kriteria Ketuntasan Minimal (KKM)<span
+                                class="text-danger">*</span></label>
+                        <input type="number" class="form-control form-control-sm" id="edit_kkm" name="kkm"
+                            required autofocus>
                     </div>
                 </div>
                 <div class="modal-footer">

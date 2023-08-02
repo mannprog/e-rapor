@@ -17,9 +17,6 @@ return new class extends Migration
             $table->foreign('walas_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('siswa_id');
             $table->foreign('siswa_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('alpa')->default('-');
-            $table->string('izin')->default('-');
-            $table->string('sakit')->default('-');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

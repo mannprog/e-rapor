@@ -23,7 +23,8 @@ class KelolaKelasRequest extends FormRequest
     {
         return [
             'nama' => 'required|max:255',
-            'jurusan_id' => 'required'
+            'jurusan_id' => 'required',
+            'kkm' => 'required',
         ];
     }
 
@@ -33,6 +34,7 @@ class KelolaKelasRequest extends FormRequest
             'nama.required' => 'Nama Kelas harus diisi',
             'nama.max' => 'Nama Kelas tidak boleh lebih dari 255 karakter',
             'jurusan.required' => 'Nama jurusan harus diisi',
+            'kkm.required' => 'Nilai KKM harus diisi',
         ];
     }
 }

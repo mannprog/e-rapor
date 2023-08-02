@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mapel;
+use App\Models\Nilai;
+use App\Models\Rapor;
 use App\Models\Rombel;
+use App\Models\RaporSiswa;
 use App\Models\RombelSiswa;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\KelolaNilaiDataTable;
-use App\Models\Nilai;
-use App\Models\Rapor;
-use App\Models\RaporSiswa;
 
 class KelolaNilaiController extends Controller
 {
@@ -37,6 +38,13 @@ class KelolaNilaiController extends Controller
         return view('admin.pages.nilai.detail', compact(['mapel', 'rombel', 'rmblssw', 'nilai']));
     }
 
+    // public function getNilaiData($id)
+    // {
+    //     $nilai = Nilai::with('rombelsiswa')->where('mapel_id', $id);
+
+    //     return DataTables::of($nilai)->toJson();
+    // }
+
     public function inputNilai($id)
     {
         try {
@@ -45,17 +53,25 @@ class KelolaNilaiController extends Controller
                     'walas_id' => 'required',
                     'mapel_id' => 'required',
                     'rs_id' => 'required',
-                    'npengetahuan' => 'required',
-                    'nketerampilan' => 'required',
-                    'nsikap' => 'required',
+                    'nharian' => 'required',
+                    'nuts' => 'required',
+                    'nuas' => 'required',
+                    'ck' => 'required',
+                    'alpa' => 'required',
+                    'izin' => 'required',
+                    'sakit' => 'required',
                 ]);
 
                 $nilai = Nilai::create([
                     'mapel_id' => request('mapel_id'),
                     'rs_id' => request('rs_id'),
-                    'npengetahuan' => request('npengetahuan'),
-                    'nketerampilan' => request('nketerampilan'),
-                    'nsikap' => request('nsikap'),
+                    'nharian' => request('nharian'),
+                    'nuts' => request('nuts'),
+                    'nuas' => request('nuas'),
+                    'ck' => request('ck'),
+                    'alpa' => request('alpa'),
+                    'izin' => request('izin'),
+                    'sakit' => request('sakit'),
                 ]);
 
                 $siswa = RombelSiswa::findOrFail(request('rs_id'));

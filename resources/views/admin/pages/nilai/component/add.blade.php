@@ -26,22 +26,43 @@
                     </div>
                     <div class="row align-items-center mb-3">
                         <div class="col-lg-4">
-                            <label for="npengetahuan" class="form-label">Nilai Pengetahuan<span
+                            <label for="nharian" class="form-label">Nilai Harian<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="npengetahuan"
-                                name="npengetahuan" required autofocus>
+                            <input type="number" min="0" max="100" class="form-control form-control-sm"
+                                id="nharian" name="nharian" required autofocus>
                         </div>
                         <div class="col-lg-4">
-                            <label for="nketerampilan" class="form-label">Nilai Keterampilan<span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="nketerampilan"
-                                name="nketerampilan" required>
+                            <label for="nuts" class="form-label">Nilai UTS<span class="text-danger">*</span></label>
+                            <input type="number" min="0" max="100" class="form-control form-control-sm"
+                                id="nuts" name="nuts" required>
                         </div>
                         <div class="col-lg-4">
-                            <label for="nsikap" class="form-label">Nilai Sikap<span
+                            <label for="nuas" class="form-label">Nilai UAS<span class="text-danger">*</span></label>
+                            <input type="number" min="0" max="100" class="form-control form-control-sm"
+                                id="nuas" name="nuas" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ck" class="form-label">Capaian Kompetensi<span
+                                class="text-danger">*</span></label>
+                        <textarea class="form-control" id="ck" rows="3" name="ck" required></textarea>
+                    </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-lg-4">
+                            <label for="alpa" class="form-label">Tanpa Keterangan<span
                                     class="text-danger">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="nsikap" name="nsikap"
-                                required>
+                            <input type="number" min="0" class="form-control form-control-sm" id="alpa"
+                                name="alpa" required autofocus>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="izin" class="form-label">Izin<span class="text-danger">*</span></label>
+                            <input type="number" min="0" class="form-control form-control-sm" id="izin"
+                                name="izin" required>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="sakit" class="form-label">Sakit<span class="text-danger">*</span></label>
+                            <input type="number" min="0" class="form-control form-control-sm" id="sakit"
+                                name="sakit" required>
                         </div>
                     </div>
                 </div>

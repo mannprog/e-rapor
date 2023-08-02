@@ -17,9 +17,13 @@ return new class extends Migration
             $table->foreign('mapel_id')->references('id')->on('mapels')->onDelete('restrict');
             $table->unsignedBigInteger('rs_id');
             $table->foreign('rs_id')->references('id')->on('rombel_siswas')->onDelete('restrict');
-            $table->string('npengetahuan');
-            $table->string('nketerampilan');
-            $table->string('nsikap');
+            $table->string('nharian');
+            $table->string('nuts');
+            $table->string('nuas');
+            $table->text('ck');
+            $table->string('alpa')->default('-');
+            $table->string('izin')->default('-');
+            $table->string('sakit')->default('-');
             $table->timestamps();
         });
     }
