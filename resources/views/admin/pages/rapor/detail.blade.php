@@ -24,18 +24,20 @@
                             <tr>
                                 <th><b>#</b></th>
                                 <th><b>Nama Mapel</b></th>
-                                <th><b>Nilai Pengetahuan</b></th>
-                                <th><b>Nilai Keterampilan</b></th>
-                                <th><b>Nilai Sikap</b></th>
+                                <th><b>Nilai Harian</b></th>
+                                <th><b>Nilai UTS</b></th>
+                                <th><b>Nilai UAS</b></th>
+                                <th><b>Capaian Kompetensi</b></th>
                             </tr>
                         </thead>
                         @foreach ($rapor as $rpr)
                             <tbody>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $rpr->nilai->mapel->nama }}</td>
-                                <td class="text-center">{{ $rpr->nilai->npengetahuan }}</td>
-                                <td class="text-center">{{ $rpr->nilai->nketerampilan }}</td>
-                                <td class="text-center">{{ $rpr->nilai->nsikap }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nharian }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nuts }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nuas }}</td>
+                                <td>{{ $rpr->nilai->ck }}</td>
                             </tbody>
                         @endforeach
                     </table>
@@ -43,87 +45,205 @@
             </div>
         </div>
 
+
         <div class="card mt-3">
             <div class="card-header">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-sm btn-primary shadow rounded" data-bs-toggle="modal"
-                    data-bs-target="#editData{{ $data->id }}">
-                    <i class="fas fa-pencil-alt me-2"></i>Data Absensi
+                    data-bs-target="#addSikap{{ $data->id }}">
+                    <i class="fas fa-pencil-alt me-2"></i>Sikap
                 </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="editData{{ $data->id }}" tabindex="-1" aria-labelledby="editLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="editLabel">Ubah Absensi</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <form action="{{ route('edit.absensi', $data->id) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="data_id" id="data_id" value="{{ $data->id }}">
-                                <div class="modal-body">
-                                    <div class="row align-items-center justify-content-center mb-3">
-                                        <div class="col-lg-5">
-                                            <label for="alpa" class="form-label">Tidak Ada
-                                                Keterangan<span class="text-danger">*</span></label>
-                                            <input type="number" min="0" max="100"
-                                                class="form-control form-control-sm" id="alpa" name="alpa" required
-                                                autofocus value="{{ old('alpa', $data->alpa) }}">
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <label for="izin" class="form-label">Izin<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="number" min="0" max="100"
-                                                class="form-control form-control-sm" id="izin" name="izin" required
-                                                autofocus value="{{ old('izin', $data->izin) }}">
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <label for="sakit" class="form-label">Sakit<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="number" min="0" max="100"
-                                                class="form-control form-control-sm" id="sakit" name="sakit" required
-                                                autofocus value="{{ old('sakit', $data->sakit) }}">
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center justify-content-center">
-                                        <div class="col-lg-11">
-                                            <label for="catatan" class="form-label">Catatan</label>
-                                            <textarea class="form-control" id="catatan" rows="3" name="catatan" required>{{ old('catatan', $data->catatan) }}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                @include('admin.pages.rapor.component.addSikap')
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-light text-center">
                             <tr>
-                                <th><b>Tidak Ada Keterangan</b></th>
-                                <th><b>Izin</b></th>
-                                <th><b>Sakit</b></th>
-                                <th><b>Catatan</b></th>
+                                <th><b>Dimensi</b></th>
+                                <th><b>Deskripsi</b></th>
                             </tr>
                         </thead>
-                        <div class="tbody">
+                        <tbody>
                             <tr>
-                                <td class="text-center">{{ $data->alpa }}</td>
-                                <td class="text-center">{{ $data->izin }}</td>
-                                <td class="text-center">{{ $data->sakit }}</td>
-                                <td>{{ $data->catatan }}</td>
+                                <td class="text-center">{{ $data->sikap->dimensi }}</td>
+                                <td class="text-center">{{ $data->sikap->deskripsi }}</td>
                             </tr>
-                        </div>
+                        </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-primary shadow rounded" data-bs-toggle="modal"
+                    data-bs-target="#addPkl{{ $data->id }}">
+                    <i class="fas fa-pencil-alt me-2"></i>PKL
+                </button>
+
+                @include('admin.pages.rapor.component.addPkl')
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th><b>#</b></th>
+                                <th><b>Mitra DU/DI</b></th>
+                                <th><b>Lokasi</b></th>
+                                <th><b>Lamanya (Bulan)</b></th>
+                                <th><b>Keterangan</b></th>
+                                <th><b>Aksi</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pkls as $pkl)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $pkl->mitra }}</td>
+                                    <td class="text-center">{{ $pkl->lokasi }}</td>
+                                    <td class="text-center">{{ $pkl->rwaktu }}</td>
+                                    <td class="text-center">{{ $pkl->keterangan }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('delete.pkl', $pkl->id) }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
+                                                    class="fas fa-trash-alt fa-sm text-white"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-sm btn-primary shadow rounded" data-bs-toggle="modal"
+                    data-bs-target="#addEkskul{{ $data->id }}">
+                    <i class="fas fa-pencil-alt me-2"></i>Ekskul
+                </button>
+
+                @include('admin.pages.rapor.component.addEkskul')
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th><b>#</b></th>
+                                <th><b>Kegiatan Ekstrakurikuler</b></th>
+                                <th><b>Predikat</b></th>
+                                <th><b>Keterangan</b></th>
+                                <th><b>Aksi</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ekskuls as $ekskul)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $ekskul->kegiatan }}</td>
+                                    <td class="text-center">{{ $ekskul->predikat }}</td>
+                                    <td class="text-center">{{ $ekskul->keterangan }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('delete.ekskul', $ekskul->id) }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger shadow-sm"><i
+                                                    class="fas fa-trash-alt fa-sm text-white"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-primary shadow rounded" data-bs-toggle="modal"
+                            data-bs-target="#addData{{ $data->id }}">
+                            <i class="fas fa-pencil-alt me-2"></i>Catatan
+                        </button>
+
+                        @include('admin.pages.rapor.component.addCatatan')
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                    <tr>
+                                        <th><b>Catatan</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $data->catatan }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                    <tr>
+                                        <th><b>Tanpa Keterangan</b></th>
+                                        <th><b>Izin</b></th>
+                                        <th><b>Sakit</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @php
+                                        $totalAlpa = 0;
+                                        $totalIzin = 0;
+                                        $totalSakit = 0;
+                                    @endphp
+        
+                                    @foreach ($ca as $item)
+                                        @php
+                                            $totalAlpa += $item->alpa;
+                                            $totalIzin += $item->izin;
+                                            $totalSakit += $item->sakit;
+                                        @endphp
+                                    @endforeach
+        
+                                    <tr>
+                                        <td class="text-center">{{ $totalAlpa }}</td>
+                                        <td class="text-center">{{ $totalIzin }}</td>
+                                        <td class="text-center">{{ $totalSakit }}</td>
+                                    </tr> --}}
+
+                                    <tr>
+                                        <td class="text-center">{{ $ca }} Hari</td>
+                                        <td class="text-center">{{ $ci }} Hari</td>
+                                        <td class="text-center">{{ $cs }} Hari</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

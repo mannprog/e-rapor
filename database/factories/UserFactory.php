@@ -67,7 +67,7 @@ class UserFactory extends Factory
                 ]);
             } else {
                 $user->detailSiswa()->create([
-                    'nisn' => fake()->randomNumber(),
+                    'nisn' => fake()->randomNumber(8),
                     'nis' => fake()->randomNumber(),
                     'tmp_lahir' => fake()->city(),
                     'tgl_lahir' => fake()->date(),

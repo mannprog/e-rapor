@@ -13,6 +13,7 @@ use InvalidArgumentException;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\DataTables\KelolaNilaiDataTable;
+use App\Models\Sikap;
 
 class KelolaNilaiController extends Controller
 {
@@ -87,6 +88,10 @@ class KelolaNilaiController extends Controller
                 Rapor::create([
                     'rapor_id' => $rs->id,
                     'nilai_id' => $nilai->id,
+                ]);
+
+                Sikap::create([
+                    'rapor_siswa_id' =>$rs->id,
                 ]);
             });
         } catch (InvalidArgumentException $e) {

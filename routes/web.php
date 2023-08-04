@@ -49,7 +49,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/absensi/{absensi}/delete', [AbsensiController::class, 'delAbsen'])->name('delete.absensi');
 
         Route::resource('rapor', RaporController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
-        Route::post('/rapor/{rapor}/editabsensi', [RaporController::class, 'editAbsensi'])->name('edit.absensi');
+        Route::post('/rapor/{rapor}/addcatatan', [RaporController::class, 'addCatatan'])->name('add.catatan');
+        Route::post('/rapor/{rapor}/addsikap', [RaporController::class, 'addSikap'])->name('add.sikap');
+        Route::post('/rapor/{rapor}/addpkl', [RaporController::class, 'addPkl'])->name('add.pkl');
+        Route::post('/rapor/{rapor}/delpkl', [RaporController::class, 'delPkl'])->name('delete.pkl');
+        Route::post('/rapor/{rapor}/addekskul', [RaporController::class, 'addEkskul'])->name('add.ekskul');
+        Route::post('/rapor/{rapor}/delekskul', [RaporController::class, 'delEkskul'])->name('delete.ekskul');
         Route::get('/rapor/{rapor}/export', [RaporController::class, 'export'])->name('rapor.export');
 
         Route::resource('kenaikan', KelolaKenaikanController::class)->except(['create', 'edit', 'destroy']);

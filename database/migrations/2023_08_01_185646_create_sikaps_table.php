@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('rapor_siswa_id');
             $table->foreign('rapor_siswa_id')->references('id')->on('rapor_siswas')->onDelete('restrict');
-            $table->string('dimensi');
-            $table->text('deskripsi');
+            $table->string('dimensi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }

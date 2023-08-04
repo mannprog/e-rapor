@@ -13,6 +13,6 @@ class Sikap extends Model
 
     public function raporsiswa()
     {
-        return $this->belongsTo(RaporSiswa::class);
+        return $this->belongsTo(RaporSiswa::class, 'rapor_siswa_id');
     }
 }
