@@ -198,7 +198,7 @@ class RaporController extends Controller
         $pdfContent = $pdf->output();
         $headers = [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Laporan-SPKK.pdf"',
+            'Content-Disposition' => 'inline; filename="Rapor.pdf"',
             'Cache-Control' => 'public, max-age=60'
         ];
 

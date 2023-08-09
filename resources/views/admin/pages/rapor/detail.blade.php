@@ -45,7 +45,6 @@
             </div>
         </div>
 
-
         <div class="card mt-3">
             <div class="card-header">
                 <!-- Button trigger modal -->
@@ -75,7 +74,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="card mt-3">
             <div class="card-header">
@@ -123,7 +121,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="card mt-3">
             <div class="card-header">

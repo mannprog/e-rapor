@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pkl;
 use App\Models\User;
 use App\Models\Mapel;
 use App\Models\Nilai;
 use App\Models\Rapor;
+use App\Models\Ekskul;
 use App\Models\Rombel;
 use App\Models\DetailGtk;
 use App\Models\RaporSiswa;
@@ -33,9 +35,14 @@ class LaporanController extends Controller
         // $siswa = User::findOrFail($id);
         $data = RaporSiswa::findOrFail($id);
         $rapor = Rapor::where('rapor_id', $data->id)->get();
+        $ca = Nilai::where('rs_id', $data->id)->sum('alpa');
+        $ci = Nilai::where('rs_id', $data->id)->sum('izin');
+        $cs = Nilai::where('rs_id', $data->id)->sum('sakit');
+        $pkls = Pkl::where('rapor_siswa_id', $data->id)->get();
+        $ekskuls = Ekskul::where('rapor_siswa_id', $data->id)->get();
 
         // return dd($data);
-        return view('admin.pages.laporan.detail', compact(['data', 'rapor']));
+        return view('admin.pages.laporan.detail', compact(['rapor', 'data', 'ca', 'ci', 'cs', 'pkls', 'ekskuls']));
     }
 
     public function export($id)
@@ -46,14 +53,19 @@ class LaporanController extends Controller
         $tajaran = TahunAjaran::findOrFail($rombel->ta_id);
         $user = DetailGtk::where('jabatan', 'kepalasekolah')->first();
         $ks = User::findOrFail($user->user_id);
+        $ca = Nilai::where('rs_id', $data->id)->sum('alpa');
+        $ci = Nilai::where('rs_id', $data->id)->sum('izin');
+        $cs = Nilai::where('rs_id', $data->id)->sum('sakit');
+        $pkls = Pkl::where('rapor_siswa_id', $data->id)->get();
+        $ekskuls = Ekskul::where('rapor_siswa_id', $data->id)->get();
 
         // return dd($tajaran);
-        $pdf = Pdf::loadView('admin.pages.laporan.export', compact(['data', 'rapor', 'rombel', 'tajaran', 'ks']));
+        $pdf = Pdf::loadView('admin.pages.laporan.export', compact(['data', 'rapor', 'rombel', 'tajaran', 'ks', 'ca', 'ci', 'cs', 'pkls', 'ekskuls']));
 
         $pdfContent = $pdf->output();
         $headers = [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Laporan-SPKK.pdf"',
+            'Content-Disposition' => 'inline; filename="Rapor.pdf"',
             'Cache-Control' => 'public, max-age=60'
         ];
 

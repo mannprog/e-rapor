@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pkl;
 use App\Models\User;
+use App\Models\Nilai;
 use App\Models\Rapor;
+use App\Models\Ekskul;
 use App\Models\Rombel;
 use App\Models\DetailGtk;
 use App\Models\RaporSiswa;
@@ -30,9 +33,14 @@ class SiswaNilaiController extends Controller
     {
         $data = RaporSiswa::findOrFail($id);
         $rapor = Rapor::where('rapor_id', $data->id)->get();
+        $ca = Nilai::where('rs_id', $data->id)->sum('alpa');
+        $ci = Nilai::where('rs_id', $data->id)->sum('izin');
+        $cs = Nilai::where('rs_id', $data->id)->sum('sakit');
+        $pkls = Pkl::where('rapor_siswa_id', $data->id)->get();
+        $ekskuls = Ekskul::where('rapor_siswa_id', $data->id)->get();
 
         // return dd($data);
-        return view('siswa.pages.nilai.detail', compact(['data', 'rapor']));
+        return view('siswa.pages.nilai.detail', compact(['rapor', 'data', 'ca', 'ci', 'cs', 'pkls', 'ekskuls']));
     }
 
     public function export($id)

@@ -22,18 +22,20 @@
                             <tr>
                                 <th><b>#</b></th>
                                 <th><b>Nama Mapel</b></th>
-                                <th><b>Nilai Pengetahuan</b></th>
-                                <th><b>Nilai Keterampilan</b></th>
-                                <th><b>Nilai Sikap</b></th>
+                                <th><b>Nilai Harian</b></th>
+                                <th><b>Nilai UTS</b></th>
+                                <th><b>Nilai UAS</b></th>
+                                <th><b>Capaian Kompetensi</b></th>
                             </tr>
                         </thead>
                         @foreach ($rapor as $rpr)
                             <tbody>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $rpr->nilai->mapel->nama }}</td>
-                                <td class="text-center">{{ $rpr->nilai->npengetahuan }}</td>
-                                <td class="text-center">{{ $rpr->nilai->nketerampilan }}</td>
-                                <td class="text-center">{{ $rpr->nilai->nsikap }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nharian }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nuts }}</td>
+                                <td class="text-center">{{ $rpr->nilai->nuas }}</td>
+                                <td>{{ $rpr->nilai->ck }}</td>
                             </tbody>
                         @endforeach
                     </table>
@@ -42,28 +44,147 @@
         </div>
 
         <div class="card mt-3">
-            <div class="card-header">
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-light text-center">
                             <tr>
-                                <th><b>Tidak Ada Keterangan</b></th>
-                                <th><b>Izin</b></th>
-                                <th><b>Sakit</b></th>
-                                <th><b>Catatan</b></th>
+                                <th><b>Dimensi</b></th>
+                                <th><b>Deskripsi</b></th>
                             </tr>
                         </thead>
-                        <div class="tbody">
+                        <tbody>
                             <tr>
-                                <td class="text-center">{{ $data->alpa }}</td>
-                                <td class="text-center">{{ $data->izin }}</td>
-                                <td class="text-center">{{ $data->sakit }}</td>
-                                <td>{{ $data->catatan }}</td>
+                                <td class="text-center">{{ $data->sikap->dimensi }}</td>
+                                <td class="text-center">{{ $data->sikap->deskripsi }}</td>
                             </tr>
-                        </div>
+                        </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th><b>#</b></th>
+                                <th><b>Mitra DU/DI</b></th>
+                                <th><b>Lokasi</b></th>
+                                <th><b>Lamanya (Bulan)</b></th>
+                                <th><b>Keterangan</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($pkls as $pkl)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $pkl->mitra }}</td>
+                                    <td class="text-center">{{ $pkl->lokasi }}</td>
+                                    <td class="text-center">{{ $pkl->rwaktu }}</td>
+                                    <td class="text-center">{{ $pkl->keterangan }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light text-center">
+                            <tr>
+                                <th><b>#</b></th>
+                                <th><b>Kegiatan Ekstrakurikuler</b></th>
+                                <th><b>Predikat</b></th>
+                                <th><b>Keterangan</b></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ekskuls as $ekskul)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $ekskul->kegiatan }}</td>
+                                    <td class="text-center">{{ $ekskul->predikat }}</td>
+                                    <td class="text-center">{{ $ekskul->keterangan }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                    <tr>
+                                        <th><b>Catatan</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $data->catatan }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                    <tr>
+                                        <th><b>Tanpa Keterangan</b></th>
+                                        <th><b>Izin</b></th>
+                                        <th><b>Sakit</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- @php
+                                        $totalAlpa = 0;
+                                        $totalIzin = 0;
+                                        $totalSakit = 0;
+                                    @endphp
+        
+                                    @foreach ($ca as $item)
+                                        @php
+                                            $totalAlpa += $item->alpa;
+                                            $totalIzin += $item->izin;
+                                            $totalSakit += $item->sakit;
+                                        @endphp
+                                    @endforeach
+        
+                                    <tr>
+                                        <td class="text-center">{{ $totalAlpa }}</td>
+                                        <td class="text-center">{{ $totalIzin }}</td>
+                                        <td class="text-center">{{ $totalSakit }}</td>
+                                    </tr> --}}
+
+                                    <tr>
+                                        <td class="text-center">{{ $ca }} Hari</td>
+                                        <td class="text-center">{{ $ci }} Hari</td>
+                                        <td class="text-center">{{ $cs }} Hari</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
